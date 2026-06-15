@@ -55,6 +55,9 @@
     <ClCompile Include="D:\SOLO-11\47-hvdc-tower-sim\src\fem\Solver.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="D:\SOLO-11\47-hvdc-tower-sim\src\fem\ArcLengthSolver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="D:\SOLO-11\47-hvdc-tower-sim\src\fvm\Cell.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

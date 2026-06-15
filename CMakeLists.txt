@@ -80,6 +80,7 @@ set(HVDC_SOURCES
     src/fem/Assembler.cpp
     src/fem/ParallelAssembler.cpp
     src/fem/Solver.cpp
+    src/fem/ArcLengthSolver.cpp
     src/fvm/Cell.cpp
     src/fvm/Face.cpp
     src/fvm/Grid.cpp
@@ -116,6 +117,7 @@ set(HVDC_HEADERS
     include/fem/Assembler.hpp
     include/fem/ParallelAssembler.hpp
     include/fem/Solver.hpp
+    include/fem/ArcLengthSolver.hpp
     include/fvm/Cell.hpp
     include/fvm/Face.hpp
     include/fvm/Grid.hpp

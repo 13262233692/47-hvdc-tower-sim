@@ -16,6 +16,7 @@ D:\SOLO-11\47-hvdc-tower-sim\src\fem\FEModel.cpp;D:\SOLO-11\47-hvdc-tower-sim\bu
 D:\SOLO-11\47-hvdc-tower-sim\src\fem\Assembler.cpp;D:\SOLO-11\47-hvdc-tower-sim\build\hvdc_core.dir\Release\Assembler.obj
 D:\SOLO-11\47-hvdc-tower-sim\src\fem\ParallelAssembler.cpp;D:\SOLO-11\47-hvdc-tower-sim\build\hvdc_core.dir\Release\ParallelAssembler.obj
 D:\SOLO-11\47-hvdc-tower-sim\src\fem\Solver.cpp;D:\SOLO-11\47-hvdc-tower-sim\build\hvdc_core.dir\Release\Solver.obj
+D:\SOLO-11\47-hvdc-tower-sim\src\fem\ArcLengthSolver.cpp;D:\SOLO-11\47-hvdc-tower-sim\build\hvdc_core.dir\Release\ArcLengthSolver.obj
 D:\SOLO-11\47-hvdc-tower-sim\src\fvm\Cell.cpp;D:\SOLO-11\47-hvdc-tower-sim\build\hvdc_core.dir\Release\Cell.obj
 D:\SOLO-11\47-hvdc-tower-sim\src\fvm\Face.cpp;D:\SOLO-11\47-hvdc-tower-sim\build\hvdc_core.dir\Release\Face.obj
 D:\SOLO-11\47-hvdc-tower-sim\src\fvm\Grid.cpp;D:\SOLO-11\47-hvdc-tower-sim\build\hvdc_core.dir\Release\Grid.obj

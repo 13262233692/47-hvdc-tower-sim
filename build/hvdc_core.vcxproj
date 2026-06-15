@@ -337,6 +337,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="D:\SOLO-11\47-hvdc-tower-sim\src\fem\Assembler.cpp" />
     <ClCompile Include="D:\SOLO-11\47-hvdc-tower-sim\src\fem\ParallelAssembler.cpp" />
     <ClCompile Include="D:\SOLO-11\47-hvdc-tower-sim\src\fem\Solver.cpp" />
+    <ClCompile Include="D:\SOLO-11\47-hvdc-tower-sim\src\fem\ArcLengthSolver.cpp" />
     <ClCompile Include="D:\SOLO-11\47-hvdc-tower-sim\src\fvm\Cell.cpp" />
     <ClCompile Include="D:\SOLO-11\47-hvdc-tower-sim\src\fvm\Face.cpp" />
     <ClCompile Include="D:\SOLO-11\47-hvdc-tower-sim\src\fvm\Grid.cpp" />

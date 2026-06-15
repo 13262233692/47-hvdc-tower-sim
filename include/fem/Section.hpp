@@ -9,7 +9,7 @@
 namespace hvdc {
 namespace fem {
 
-class Material;
+struct Material;
 
 struct BeamSection {
     Index id = -1;
