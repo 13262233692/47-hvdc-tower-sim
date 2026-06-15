@@ -1,0 +1,8 @@
+add_executable(example_uhv_tower example_uhv_tower.cpp)
+target_link_libraries(example_uhv_tower PRIVATE hvdc_core)
+
+add_executable(example_iced_conductor example_iced_conductor.cpp)
+target_link_libraries(example_iced_conductor PRIVATE hvdc_core)
+
+add_executable(example_typhoon_fsi example_typhoon_fsi.cpp)
+target_link_libraries(example_typhoon_fsi PRIVATE hvdc_core)

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\SOLO-11\47-hvdc-tower-sim\build\CMakeFiles\b083c273929f8496266e6f05f6679740\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{E6B0E40F-BA47-3586-BF80-7C60A9663DF9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
