@@ -66,7 +66,8 @@ void Element2N::transform_12x12(
                     }
             } else {
                 for (Index i = 0; i < 3; ++i)
-                    K_global[bi*3+i][bj*3+j] = K_local[bi*3+i][bj*3+j];
+                    for (Index j = 0; j < 3; ++j)
+                        K_global[bi*3+i][bj*3+j] = K_local[bi*3+i][bj*3+j];
             }
         }
     }

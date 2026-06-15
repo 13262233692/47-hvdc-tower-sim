@@ -78,7 +78,7 @@ public:
         Vector& b_U,
         VectorField& HbyA,
         Vector& diag_inv_Ap,
-        std::vector<Vec3>& grad_p) const;
+        VectorField& grad_p) const;
     
     void assemble_pressure_correction(
         FluidState& state,
@@ -87,9 +87,9 @@ public:
         const VectorField& HbyA,
         SparseMatrix& A_p,
         Vector& b_p,
-        std::vector<Vec3>& face_velocity,
+        VectorField& face_velocity,
         std::vector<Real>& face_mass_flux,
-        const std::vector<Vec3>& grad_p) const;
+        const VectorField& grad_p) const;
     
     void correct_velocity_and_pressure(
         FluidState& state,
@@ -97,9 +97,9 @@ public:
         const Vector& diag_inv_Ap,
         const VectorField& HbyA,
         const ScalarField& dp,
-        std::vector<Vec3>& face_velocity,
+        VectorField& face_velocity,
         std::vector<Real>& face_mass_flux,
-        const std::vector<Vec3>& grad_p) const;
+        const VectorField& grad_p) const;
     
     ScalarField compute_kinetic_energy_dissipation(
         const FluidState& state,

@@ -231,10 +231,15 @@ void FluidSolver::solve_momentum_predictor(Index component) {
         dt = compute_suggested_dt();
     }
     
+    VectorField grad_p_vf(nc);
+    for (Index i = 0; i < nc; ++i) grad_p_vf[i] = grad_p_[i];
+    
     ns_.assemble_momentum_predictor(
         state_, prev_state, dt, component,
         A_U[component], b_U[component], HbyA_,
-        diag_inv_Ap[component], grad_p_);
+        diag_inv_Ap[component], grad_p_vf);
+    
+    for (Index i = 0; i < nc; ++i) grad_p_[i] = grad_p_vf[i];
     
     if (bc_mgr_) {
         bc_mgr_->update_linear_system_bc(*grid_, "U", component,
@@ -261,9 +266,18 @@ void FluidSolver::solve_momentum_predictor(Index component) {
 }
 
 void FluidSolver::solve_pressure_correction() {
+    Index nc = grid_->num_cells();
+    Index nf = grid_->num_faces();
+    
+    VectorField grad_p_vf(nc);
+    for (Index i = 0; i < nc; ++i) grad_p_vf[i] = grad_p_[i];
+    
+    VectorField face_vel_vf(nf);
+    for (Index i = 0; i < nf; ++i) face_vel_vf[i] = face_velocity_[i];
+    
     ns_.assemble_pressure_correction(
         state_, A_p, diag_inv_Ap[0], HbyA_,
-        A_p, b_p, face_velocity_, face_mass_flux_, grad_p_);
+        A_p, b_p, face_vel_vf, face_mass_flux_, grad_p_vf);
     
     ScalarField dp(grid_->num_cells(), 0.0, FieldLocation::CellCenter, "dp");
     Vector x_vec(dp.raw());
@@ -279,7 +293,10 @@ void FluidSolver::solve_pressure_correction() {
     
     ns_.correct_velocity_and_pressure(
         state_, A_p, diag_inv_Ap[0], HbyA_, dp,
-        face_velocity_, face_mass_flux_, grad_p_);
+        face_vel_vf, face_mass_flux_, grad_p_vf);
+    
+    for (Index i = 0; i < nf; ++i) face_velocity_[i] = face_vel_vf[i];
+    for (Index i = 0; i < nc; ++i) grad_p_[i] = grad_p_vf[i];
     
     ns_.discretization().under_relax_field(state_.p, state_prev_.p, config_.disc_config.relaxation_p);
     

@@ -96,11 +96,13 @@ PETScVector& PETScVector::operator=(PETScVector&& other) noexcept {
 void PETScVector::create(Index size) {
     destroy();
     size_ = size;
-    local_size_ = PETSC_DECIDE;
 #ifdef HVDC_USE_PETSC
+    local_size_ = PETSC_DECIDE;
     VecCreate(PETSC_COMM_WORLD, &vec_);
     VecSetSizes(vec_, PETSC_DECIDE, size);
     VecSetFromOptions(vec_);
+#else
+    local_size_ = size;
 #endif
 }
 
@@ -280,13 +282,15 @@ void PETScMatrix::create(Index nrows, Index ncols, Index nnz_per_row) {
     destroy();
     nrows_ = nrows;
     ncols_ = ncols;
-    local_rows_ = PETSC_DECIDE;
 #ifdef HVDC_USE_PETSC
+    local_rows_ = PETSC_DECIDE;
     MatCreate(PETSC_COMM_WORLD, &mat_);
     MatSetSizes(mat_, PETSC_DECIDE, PETSC_DECIDE, nrows, ncols);
     MatSetFromOptions(mat_);
     MatSeqAIJSetPreallocation(mat_, nnz_per_row, nullptr);
     MatMPIAIJSetPreallocation(mat_, nnz_per_row, nullptr, nnz_per_row, nullptr);
+#else
+    local_rows_ = nrows;
 #endif
 }
 

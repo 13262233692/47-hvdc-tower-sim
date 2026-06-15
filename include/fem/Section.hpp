@@ -4,9 +4,12 @@
 #include "common/Types.hpp"
 #include <string>
 #include <cmath>
+#include <memory>
 
 namespace hvdc {
 namespace fem {
+
+class Material;
 
 struct BeamSection {
     Index id = -1;

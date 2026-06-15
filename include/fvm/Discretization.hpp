@@ -122,6 +122,7 @@ public:
     void compute_face_velocity_rhie_chow(
         const VelocityField& U,
         const ScalarField& p,
+        const ScalarField& rho,
         const SparseMatrix& Ap,
         const Vector& diag_inv_Ap,
         std::vector<Vec3>& face_velocity,

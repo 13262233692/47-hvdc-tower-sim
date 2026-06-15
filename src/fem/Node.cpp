@@ -16,14 +16,6 @@ Node::Node(Index id, const Vec3& coords)
     bc_values_.fill(0.0);
 }
 
-Vec3 Node::displaced_coords(const Vec& displacement) const {
-    Vec3 c = coords_;
-    for (Index i = 0; i < std::min<Index>(3, ndofs_); ++i) {
-        c[i] += displacement[dof_start_ + i];
-    }
-    return c;
-}
-
 Vec3 Node::displaced_coords(const Vec3& disp) const {
     return {coords_[0] + disp[0], coords_[1] + disp[1], coords_[2] + disp[2]};
 }

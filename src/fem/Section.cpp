@@ -1,4 +1,5 @@
 #include "fem/Section.hpp"
+#include "fem/Material.hpp"
 
 namespace hvdc {
 namespace fem {

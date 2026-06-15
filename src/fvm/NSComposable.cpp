@@ -123,9 +123,22 @@ void NSComposable::assemble_pressure_correction(
     disc_.discretize_pressure_equation(
         state.U, state.rho, Ap, diag_inv_Ap, A_p, b_p, &HbyA);
     
+    std::vector<Vec3> face_vel_vec(face_velocity.size());
+    for (Index i = 0; i < face_velocity.size(); ++i) {
+        face_vel_vec[i] = face_velocity[i];
+    }
+    std::vector<Vec3> grad_p_vec(grad_p.size());
+    for (Index i = 0; i < grad_p.size(); ++i) {
+        grad_p_vec[i] = grad_p[i];
+    }
+    
     disc_.compute_face_velocity_rhie_chow(
-        state.U, state.p, Ap, diag_inv_Ap,
-        face_velocity, face_mass_flux, grad_p);
+        state.U, state.p, state.rho, Ap, diag_inv_Ap,
+        face_vel_vec, face_mass_flux, grad_p_vec);
+    
+    for (Index i = 0; i < face_velocity.size() && i < static_cast<Index>(face_vel_vec.size()); ++i) {
+        face_velocity[i] = face_vel_vec[i];
+    }
 }
 
 void NSComposable::correct_velocity_and_pressure(
@@ -157,9 +170,22 @@ void NSComposable::correct_velocity_and_pressure(
         state.p[ci] += dp[ci];
     }
     
+    std::vector<Vec3> face_vel_vec2(face_velocity.size());
+    for (Index i = 0; i < face_velocity.size(); ++i) {
+        face_vel_vec2[i] = face_velocity[i];
+    }
+    std::vector<Vec3> grad_p_vec2(grad_p.size());
+    for (Index i = 0; i < grad_p.size(); ++i) {
+        grad_p_vec2[i] = grad_p[i];
+    }
+    
     disc_.compute_face_velocity_rhie_chow(
-        state.U, state.p, Ap, diag_inv_Ap,
-        face_velocity, face_mass_flux, grad_p);
+        state.U, state.p, state.rho, Ap, diag_inv_Ap,
+        face_vel_vec2, face_mass_flux, grad_p_vec2);
+    
+    for (Index i = 0; i < face_velocity.size() && i < static_cast<Index>(face_vel_vec2.size()); ++i) {
+        face_velocity[i] = face_vel_vec2[i];
+    }
 }
 
 ScalarField NSComposable::compute_kinetic_energy_dissipation(

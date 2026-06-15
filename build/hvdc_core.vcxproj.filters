@@ -10,6 +10,9 @@
     <ClCompile Include="D:\SOLO-11\47-hvdc-tower-sim\src\common\MPIManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="D:\SOLO-11\47-hvdc-tower-sim\src\common\GhostExchange.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="D:\SOLO-11\47-hvdc-tower-sim\src\common\PETScManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -46,6 +49,9 @@
     <ClCompile Include="D:\SOLO-11\47-hvdc-tower-sim\src\fem\Assembler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="D:\SOLO-11\47-hvdc-tower-sim\src\fem\ParallelAssembler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="D:\SOLO-11\47-hvdc-tower-sim\src\fem\Solver.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -71,6 +77,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="D:\SOLO-11\47-hvdc-tower-sim\src\fvm\BoundaryCondition.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\SOLO-11\47-hvdc-tower-sim\src\fvm\ParallelExchange.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="D:\SOLO-11\47-hvdc-tower-sim\src\fsi\InterfaceMapper.cpp">

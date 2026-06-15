@@ -224,6 +224,18 @@ Real ConductorElement::current_tension(const Vec12& displacement) const {
     return std::max(T, 0.0);
 }
 
+Real ConductorElement::axial_strain(const Vec12& displacement) const {
+    Real T = current_tension(displacement);
+    if (!section_ || !material_ || section_->A <= EPS) return 0.0;
+    return T / (material_->E * section_->A);
+}
+
+Real ConductorElement::axial_stress(const Vec12& displacement) const {
+    Real T = current_tension(displacement);
+    if (!section_ || section_->A <= EPS) return 0.0;
+    return T / section_->A;
+}
+
 Real ConductorElement::catenary_length() const {
     if (sag_ <= 0.0 || L0_ <= 0.0) return L0_;
     

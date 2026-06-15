@@ -107,7 +107,7 @@ class PETScMatrix {
 public:
     PETScMatrix() = default;
     PETScMatrix(Index nrows, Index ncols, Index nnz_per_row = 10);
-    PETScMatrix(Index local_rows, Index global_rows, Index global_cols, Index nnz_per_row = 10);
+    PETScMatrix(Index local_rows, Index global_rows, Index global_cols, Index nnz_per_row);
     ~PETScMatrix();
     
     PETScMatrix(const PETScMatrix&) = delete;
@@ -116,7 +116,7 @@ public:
     PETScMatrix& operator=(PETScMatrix&& other) noexcept;
     
     void create(Index nrows, Index ncols, Index nnz_per_row = 10);
-    void create(Index local_rows, Index global_rows, Index global_cols, Index nnz_per_row = 10);
+    void create(Index local_rows, Index global_rows, Index global_cols, Index nnz_per_row);
     void destroy();
     
     void from_sparse_matrix(const SparseMatrix& mat);

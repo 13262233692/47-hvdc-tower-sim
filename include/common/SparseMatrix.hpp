@@ -59,6 +59,18 @@ public:
         dirty_ = true;
     }
     
+    void set_row(Index row, const IndexVec& cols, const Vec& vals) {
+        for (Index i = 0; i < static_cast<Index>(cols.size()); ++i) {
+            set(row, cols[i], vals[i]);
+        }
+    }
+    
+    void add_row(Index row, const IndexVec& cols, const Vec& vals) {
+        for (Index i = 0; i < static_cast<Index>(cols.size()); ++i) {
+            add(row, cols[i], vals[i]);
+        }
+    }
+    
     void finalize();
     
     Real operator()(Index row, Index col) const {
@@ -103,6 +115,25 @@ public:
         }
     }
     
+    void to_triplets(IndexVec& rows, IndexVec& cols, Vec& vals) const {
+        if (dirty_) const_cast<SparseMatrix*>(this)->finalize();
+        rows.clear();
+        cols.clear();
+        vals.clear();
+        rows.reserve(nnz());
+        cols.reserve(nnz());
+        vals.reserve(nnz());
+        for (Index r = 0; r < nrows_; ++r) {
+            Index start = row_ptr_[r];
+            Index end = row_ptr_[r + 1];
+            for (Index i = start; i < end; ++i) {
+                rows.push_back(r);
+                cols.push_back(col_idx_[i]);
+                vals.push_back(values_[i]);
+            }
+        }
+    }
+    
     void clear() {
         nrows_ = ncols_ = 0;
         row_ptr_.clear();
@@ -137,6 +168,21 @@ public:
     const Vec& values() const {
         if (dirty_) const_cast<SparseMatrix*>(this)->finalize();
         return values_;
+    }
+    
+    Index row_start(Index row) const {
+        if (dirty_) const_cast<SparseMatrix*>(this)->finalize();
+        return row_ptr_[row];
+    }
+    
+    Index col(Index idx) const {
+        if (dirty_) const_cast<SparseMatrix*>(this)->finalize();
+        return col_idx_[idx];
+    }
+    
+    Real value(Index idx) const {
+        if (dirty_) const_cast<SparseMatrix*>(this)->finalize();
+        return values_[idx];
     }
     
     IndexVec& row_ptr() {

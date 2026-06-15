@@ -5,6 +5,8 @@
 #include <array>
 
 namespace hvdc {
+class Vector;
+
 namespace fem {
 
 class Node {
@@ -23,9 +25,8 @@ public:
     void set_coords(const Vec3& c) { coords_ = c; }
     void set_coords(Real x, Real y, Real z) { coords_ = {x, y, z}; }
     
-    Vec3 displaced_coords(const Vec& displacement) const;
     Vec3 displaced_coords(const Vec3& disp) const;
-    Vec3 displaced_coords(const class Vector& displacement) const;
+    Vec3 displaced_coords(const hvdc::Vector& displacement) const;
     
     Index dof_start() const { return dof_start_; }
     void set_dof_start(Index start) { dof_start_ = start; }

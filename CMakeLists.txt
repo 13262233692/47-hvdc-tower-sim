@@ -65,6 +65,7 @@ set(HVDC_SOURCES
     src/common/Types.cpp
     src/common/MathUtils.cpp
     src/common/MPIManager.cpp
+    src/common/GhostExchange.cpp
     src/common/PETScManager.cpp
     src/common/Timer.cpp
     src/common/Logger.cpp
@@ -77,6 +78,7 @@ set(HVDC_SOURCES
     src/fem/ConductorElement.cpp
     src/fem/FEModel.cpp
     src/fem/Assembler.cpp
+    src/fem/ParallelAssembler.cpp
     src/fem/Solver.cpp
     src/fvm/Cell.cpp
     src/fvm/Face.cpp
@@ -86,6 +88,7 @@ set(HVDC_SOURCES
     src/fvm/NSComposable.cpp
     src/fvm/FluidSolver.cpp
     src/fvm/BoundaryCondition.cpp
+    src/fvm/ParallelExchange.cpp
     src/fsi/InterfaceMapper.cpp
     src/fsi/AerodynamicLoads.cpp
     src/fsi/CouplingManager.cpp
@@ -96,6 +99,7 @@ set(HVDC_HEADERS
     include/common/Types.hpp
     include/common/MathUtils.hpp
     include/common/MPIManager.hpp
+    include/common/GhostExchange.hpp
     include/common/PETScManager.hpp
     include/common/Timer.hpp
     include/common/Logger.hpp
@@ -110,6 +114,7 @@ set(HVDC_HEADERS
     include/fem/ConductorElement.hpp
     include/fem/FEModel.hpp
     include/fem/Assembler.hpp
+    include/fem/ParallelAssembler.hpp
     include/fem/Solver.hpp
     include/fvm/Cell.hpp
     include/fvm/Face.hpp
@@ -119,6 +124,7 @@ set(HVDC_HEADERS
     include/fvm/NSComposable.hpp
     include/fvm/FluidSolver.hpp
     include/fvm/BoundaryCondition.hpp
+    include/fvm/ParallelExchange.hpp
     include/fsi/InterfaceMapper.hpp
     include/fsi/AerodynamicLoads.hpp
     include/fsi/CouplingManager.hpp

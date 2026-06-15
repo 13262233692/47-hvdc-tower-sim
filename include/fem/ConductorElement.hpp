@@ -39,6 +39,8 @@ public:
     Vec12 gravity_loads(Real g = GRAVITY) const override;
     
     Real current_tension(const Vec12& displacement) const;
+    Real axial_strain(const Vec12& displacement) const;
+    Real axial_stress(const Vec12& displacement) const;
     Real catenary_length() const;
     void catenary_shape(Index n_points,
                         std::vector<Vec3>& points,

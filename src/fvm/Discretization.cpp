@@ -534,6 +534,7 @@ void Discretization::discretize_pressure_equation(
 void Discretization::compute_face_velocity_rhie_chow(
     const VelocityField& U,
     const ScalarField& p,
+    const ScalarField& rho,
     const SparseMatrix& Ap,
     const Vector& diag_inv_Ap,
     std::vector<Vec3>& face_velocity,
@@ -581,7 +582,7 @@ void Discretization::compute_face_velocity_rhie_chow(
         Vec3 correction = math::vec3_zero();
         Real r_f = gc * r_P + gc_inv * r_N;
         for (Index i = 0; i < 3; ++i) {
-            correction[i] = -r_f * (gp_f[i] - delta_p * face.normal()[i]);
+            correction[i] = -r_f * (gp_f[i] - p_diff * face.normal()[i]);
         }
         
         for (Index i = 0; i < 3; ++i) {
