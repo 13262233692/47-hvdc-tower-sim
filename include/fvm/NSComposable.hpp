@@ -57,6 +57,8 @@ public:
     
     const FlowConfig& flow_config() const { return flow_cfg_; }
     DiscretizationConfig& disc_config() { return disc_.mutable_config(); }
+    const Discretization& discretization() const { return disc_; }
+    Discretization& discretization() { return disc_; }
     
     void initialize_state(FluidState& state) const;
     
@@ -76,7 +78,7 @@ public:
         Vector& b_U,
         VectorField& HbyA,
         Vector& diag_inv_Ap,
-        VectorField& grad_p) const;
+        std::vector<Vec3>& grad_p) const;
     
     void assemble_pressure_correction(
         FluidState& state,
@@ -85,9 +87,9 @@ public:
         const VectorField& HbyA,
         SparseMatrix& A_p,
         Vector& b_p,
-        VectorField& face_velocity,
+        std::vector<Vec3>& face_velocity,
         std::vector<Real>& face_mass_flux,
-        const VectorField& grad_p) const;
+        const std::vector<Vec3>& grad_p) const;
     
     void correct_velocity_and_pressure(
         FluidState& state,
@@ -95,9 +97,9 @@ public:
         const Vector& diag_inv_Ap,
         const VectorField& HbyA,
         const ScalarField& dp,
-        VectorField& face_velocity,
+        std::vector<Vec3>& face_velocity,
         std::vector<Real>& face_mass_flux,
-        const VectorField& grad_p) const;
+        const std::vector<Vec3>& grad_p) const;
     
     ScalarField compute_kinetic_energy_dissipation(
         const FluidState& state,
@@ -124,7 +126,7 @@ public:
     Vec3 compute_total_force_on_boundary(
         Index patch_id,
         const FluidState& state,
-        const VectorField& grad_p,
+        const std::vector<Vec3>& grad_p,
         const std::vector<std::array<Vec3, 3>>& grad_U) const;
     
     Real compute_mass_imbalance(

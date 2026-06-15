@@ -65,6 +65,8 @@ struct FluidSolverConfig {
     
     bool compute_forces_every_step = true;
     Index output_interval = 10;
+    
+    DiscretizationConfig disc_config;
 };
 
 struct FluidIterationStats {

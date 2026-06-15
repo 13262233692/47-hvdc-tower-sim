@@ -122,7 +122,7 @@ void FluidSolver::apply_all_boundary_conditions() {
 }
 
 void FluidSolver::update_gradients() {
-    ns_.disc().compute_vector_gradient(state_.U, face_velocity_, grad_U_);
+    ns_.discretization().compute_vector_gradient(state_.U, face_velocity_, grad_U_);
     
     Index nc = grid_->num_cells();
     for (Index ci = 0; ci < nc; ++ci) {
@@ -251,9 +251,11 @@ void FluidSolver::solve_momentum_predictor(Index component) {
         config_.max_linear_iters_U, config_.linear_rtol_U,
         1.0e-50, &iters);
     
-    state_.U.set_component(component, ScalarField(x_vec.raw()));
+    ScalarField u_comp(grid_->num_cells(), 0.0);
+    for (Index i = 0; i < x_vec.size(); ++i) u_comp[i] = x_vec[i];
+    state_.U.set_component(component, u_comp);
     
-    ns_.disc().under_relax_vector_field(state_.U, state_prev_.U, config_.disc_config().relaxation_U);
+    ns_.discretization().under_relax_vector_field(state_.U, state_prev_.U, config_.disc_config.relaxation_U);
     
     (void)res;
 }
@@ -273,13 +275,13 @@ void FluidSolver::solve_pressure_correction() {
         config_.max_linear_iters_p, config_.linear_rtol_p,
         1.0e-50, &iters);
     
-    dp = ScalarField(x_vec.raw());
+    for (Index i = 0; i < x_vec.size(); ++i) dp[i] = x_vec[i];
     
     ns_.correct_velocity_and_pressure(
         state_, A_p, diag_inv_Ap[0], HbyA_, dp,
         face_velocity_, face_mass_flux_, grad_p_);
     
-    ns_.disc().under_relax_field(state_.p, state_prev_.p, config_.disc_config().relaxation_p);
+    ns_.discretization().under_relax_field(state_.p, state_prev_.p, config_.disc_config.relaxation_p);
     
     (void)res;
 }
@@ -299,7 +301,7 @@ void FluidSolver::solve_turbulence_equations(Real dt) {
         config_.linear_solver_turb, config_.preconditioner_turb,
         config_.max_linear_iters_k, config_.linear_rtol_turb,
         1.0e-50, &iters);
-    k_new = ScalarField(x_vec.raw());
+    for (Index i = 0; i < x_vec.size(); ++i) k_new[i] = x_vec[i];
     
     ScalarField eps_new = state_.turb.epsilon;
     Vector x_vec_eps(eps_new.raw());
@@ -307,10 +309,10 @@ void FluidSolver::solve_turbulence_equations(Real dt) {
         config_.linear_solver_turb, config_.preconditioner_turb,
         config_.max_linear_iters_eps, config_.linear_rtol_turb,
         1.0e-50, &iters);
-    eps_new = ScalarField(x_vec_eps.raw());
+    for (Index i = 0; i < x_vec_eps.size(); ++i) eps_new[i] = x_vec_eps[i];
     
-    ns_.disc().under_relax_field(k_new, state_.turb.k, config_.disc_config().relaxation_k);
-    ns_.disc().under_relax_field(eps_new, state_.turb.epsilon, config_.disc_config().relaxation_eps);
+    ns_.discretization().under_relax_field(k_new, state_.turb.k, config_.disc_config.relaxation_k);
+    ns_.discretization().under_relax_field(eps_new, state_.turb.epsilon, config_.disc_config.relaxation_eps);
     
     ns_.update_turbulence_from_solution(state_, k_new, eps_new);
     

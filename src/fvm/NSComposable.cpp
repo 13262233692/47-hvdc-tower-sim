@@ -294,15 +294,15 @@ Real NSComposable::compute_cfl_number(
 Vec3 NSComposable::compute_total_force_on_boundary(
     Index patch_id,
     const FluidState& state,
-    const VectorField& grad_p,
+    const std::vector<Vec3>& grad_p,
     const std::vector<std::array<Vec3, 3>>& grad_U) const
 {
     Vec3 force = {0.0, 0.0, 0.0};
-    auto range = grid_->boundary_patch_range(patch_id);
+    std::pair<Index, Index> range = grid_->boundary_patch_range(patch_id);
     if (range.first < 0) return force;
     
     for (Index fi = range.first; fi < range.second; ++fi) {
-        const Face& face = grid_->face(fi);
+        const Face face = grid_->face(fi);
         Vec3 nA = math::vec3_scale(face.normal(), face.area());
         Index ci = face.owner() >= 0 ? face.owner() : face.neighbor();
         if (ci < 0) continue;
